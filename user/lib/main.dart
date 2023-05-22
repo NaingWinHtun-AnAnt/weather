@@ -25,10 +25,6 @@ void main() async {
   await Firebase.initializeApp();
   FCMService().listenForMessages();
 
-  FCMService()
-      .getFCMToken()
-      .then((value) => print(">>>>>>>>>>>>>>>>>>>>>>>> $value"));
-
   /// hive
   await Hive.initFlutter();
 

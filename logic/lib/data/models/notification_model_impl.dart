@@ -23,16 +23,20 @@ class NotificationModelImpl extends NotificationModel {
   Future<SendNotificationResponse?> sendNotification({
     required String title,
     required String body,
+    required String id,
   }) {
-    return _craftNotification(title: title, body: body)
+    return _craftNotification(title: title, body: body, id: id)
         .then((value) => _dataAgent.sendNotification(value));
   }
 
-  Future<SendNotificationRequest> _craftNotification(
-          {required String title, required String body}) =>
+  Future<SendNotificationRequest> _craftNotification({
+    required String title,
+    required String body,
+    required String id,
+  }) =>
       Future.value(SendNotificationRequest(
         registrationIds: [
-          "echyRyGER0S3yifE806IQb:APA91bGIpUELkXtdoJ0RQzZ6jSC7rKBEF0MeKtPQCXdSN5IMaoiW_BRju_ZqN5wOx6xm1DpI0DNIBtAr2dB8EIJ-v-1y25OlsGqihmuGp_wa9tqyedzHpHbIZVmW5UUm69lJUB6l7VID"
+          id,
         ],
         notification: NotificationRequest(
           title: title,

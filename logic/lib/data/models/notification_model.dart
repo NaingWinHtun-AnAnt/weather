@@ -5,5 +5,6 @@ abstract class NotificationModel {
   Future<SendNotificationResponse?> sendNotification({
     required String title,
     required String body,
+    required String id,
   });
 }

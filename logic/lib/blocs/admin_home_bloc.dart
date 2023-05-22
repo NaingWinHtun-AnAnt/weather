@@ -13,6 +13,7 @@ class AdminHomeBloc extends ChangeNotifier {
   /// state
   String? title;
   String? body;
+  String? token;
 
   /// model
   final NotificationModel _mNotificationModel = NotificationModelImpl();
@@ -27,13 +28,22 @@ class AdminHomeBloc extends ChangeNotifier {
     body = value;
   }
 
+  void onChangeToken({required String value}) {
+    token = value;
+  }
+
   /// send notification
   void sendNotification() {
-    if (title.isNotNullOrEmpty() && body.isNotNullOrEmpty()) {
+    if (title.isNotNullOrEmpty() &&
+        body.isNotNullOrEmpty() &&
+        token.isNotNullOrEmpty()) {
       showLoading();
       _mNotificationModel
           .sendNotification(
-              title: title ?? "This is title.", body: body ?? "This is body.")
+            title: title ?? "This is title.",
+            body: body ?? "This is body.",
+            id: token ?? "",
+          )
           .whenComplete(() => hideLoading());
     }
   }

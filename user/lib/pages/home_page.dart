@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:logic/export_logic.dart';
 import 'package:logic/extensions/export_extensions.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +13,9 @@ import 'package:user/pages/search_result_page.dart';
 import 'package:user/resources/image_constants.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +82,21 @@ class HomePage extends StatelessWidget {
                                 ),
                               )
                             : null,
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.1,
+                      ),
+                      GestureDetector(
+                        onLongPress: () {
+                          Clipboard.setData(
+                              ClipboardData(text: bloc.token ?? ""));
+                        },
+                        child: SelectableText(
+                          bloc.token ?? "-------",
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ],
                   ),

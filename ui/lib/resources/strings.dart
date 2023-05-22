@@ -20,6 +20,8 @@ const hintNotificationTitle = "News for you";
 const notificationBody = "Notification Body";
 const hintNotificationBody = "Today Weather Forecast for you.";
 const sendNotification = "Send Notification";
+const hintNotificationToken = "Token for notification";
+const notificationToken = "Token Here";
 
 /// detail page
 const wind = "Wind";

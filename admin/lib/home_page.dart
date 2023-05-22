@@ -44,6 +44,14 @@ class HomePage extends StatelessWidget {
                       onChange: (value) =>
                           bloc.onChangeNotificationBody(value: value),
                     ),
+                    const SizedBox(
+                      height: marginMedium3,
+                    ),
+                    TextFieldView(
+                      title: hintNotificationToken,
+                      hint: notificationToken,
+                      onChange: (value) => bloc.onChangeToken(value: value),
+                    ),
                     ButtonView(
                       text: sendNotification,
                       icon: Icons.send_rounded,
