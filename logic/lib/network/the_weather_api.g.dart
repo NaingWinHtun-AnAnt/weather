@@ -26,12 +26,12 @@ class _TheWeatherApi implements TheWeatherApi {
     String keyword,
   ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = {
-      'key': key,
-      'q': keyword,
+    final queryParameters = <String, dynamic>{
+      r'key': key,
+      r'q': keyword,
     };
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch<List<dynamic>>(_setStreamType<List<CityVO>>(Options(
       method: 'POST',
@@ -58,13 +58,13 @@ class _TheWeatherApi implements TheWeatherApi {
     String aqi,
   ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = {
-      'key': key,
-      'q': keyword,
-      'aqi': aqi,
+    final queryParameters = <String, dynamic>{
+      r'key': key,
+      r'q': keyword,
+      r'aqi': aqi,
     };
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<WeatherVO>(Options(
       method: 'POST',
@@ -90,14 +90,14 @@ class _TheWeatherApi implements TheWeatherApi {
     String aqi,
   ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = {
-      'key': key,
-      'q': keyword,
-      'days': days,
-      'aqi': aqi,
+    final queryParameters = <String, dynamic>{
+      r'key': key,
+      r'q': keyword,
+      r'days': days,
+      r'aqi': aqi,
     };
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<WeatherForecastVO>(Options(
       method: 'POST',
@@ -106,7 +106,7 @@ class _TheWeatherApi implements TheWeatherApi {
     )
             .compose(
               _dio.options,
-              'current.json',
+              'forecast.json',
               queryParameters: queryParameters,
               data: _data,
             )

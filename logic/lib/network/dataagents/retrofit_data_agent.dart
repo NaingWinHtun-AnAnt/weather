@@ -30,15 +30,12 @@ class RetrofitDataAgentImpl extends DataAgent {
   @override
   Future<WeatherForecastVO> getWeatherForecast({
     required String keyword,
-    required String days,
-    required String aqi,
   }) =>
-      _mApi.getWeatherForecast(apiKey, keyword, days, aqi);
+      _mApi.getWeatherForecast(apiKey, keyword, "3", "yes");
 
   @override
   Future<WeatherVO> getWeatherDetail({
     required String keyword,
-    required String aqi,
   }) =>
-      _mApi.getWeatherDetail(apiKey, keyword, aqi);
+      _mApi.getWeatherDetail(apiKey, keyword, "yes");
 }

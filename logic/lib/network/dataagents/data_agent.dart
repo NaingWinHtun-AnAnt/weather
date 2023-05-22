@@ -9,12 +9,9 @@ abstract class DataAgent {
 
   Future<WeatherVO> getWeatherDetail({
     required String keyword,
-    required String aqi,
   });
 
   Future<WeatherForecastVO> getWeatherForecast({
     required String keyword,
-    required String days,
-    required String aqi,
   });
 }

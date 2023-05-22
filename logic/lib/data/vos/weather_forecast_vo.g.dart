@@ -3,6 +3,50 @@
 part of 'weather_forecast_vo.dart';
 
 // **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class WeatherForecastVOAdapter extends TypeAdapter<WeatherForecastVO> {
+  @override
+  final int typeId = 2;
+
+  @override
+  WeatherForecastVO read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return WeatherForecastVO(
+      location: fields[0] as LocationVO?,
+      current: fields[1] as CurrentVO?,
+      forecast: fields[2] as ForecastVO?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, WeatherForecastVO obj) {
+    writer
+      ..writeByte(3)
+      ..writeByte(0)
+      ..write(obj.location)
+      ..writeByte(1)
+      ..write(obj.current)
+      ..writeByte(2)
+      ..write(obj.forecast);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is WeatherForecastVOAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 

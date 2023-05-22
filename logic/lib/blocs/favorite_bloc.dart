@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:logic/data/models/weather_model.dart';
 import 'package:logic/data/models/weather_model_impl.dart';
+import 'package:logic/data/vos/city_vo.dart';
 
-class FavouriteBloc extends ChangeNotifier {
+class FavoriteBloc extends ChangeNotifier {
   /// bloc controls
   bool _isDispose = false;
 
@@ -12,10 +13,19 @@ class FavouriteBloc extends ChangeNotifier {
   /// model
   final WeatherModel _mWeatherModel = WeatherModelImpl();
 
-  FavouriteBloc() {
-    _mWeatherModel
-        .searchCity(keyword: "Yangon")
-        .then((value) => print(">>>>>>>>> ${value.length}"));
+  /// states
+  List<CityVO> favoriteCityList = [];
+
+  FavoriteBloc() {
+    _mWeatherModel.getCityFromDatabase().listen((event) {
+      favoriteCityList = event;
+      _notifySafely();
+    });
+  }
+
+  /// delete favorite
+  void deleteFavorite({required int cityId}) {
+    _mWeatherModel.deleteCity(cityId: cityId);
   }
 
   /// show loading

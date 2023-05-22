@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logic/export_logic.dart';
+import 'package:logic/extensions/export_extensions.dart';
 import 'package:provider/provider.dart';
 import 'package:ui/resources/colors.dart';
 import 'package:ui/resources/dimens.dart';
@@ -18,72 +19,85 @@ class HomePage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (BuildContext context) => HomeBloc(),
       child: Scaffold(
-        body: Stack(
-          alignment: Alignment.topRight,
-          children: [
-            SingleChildScrollView(
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: marginMedium2,
-                  vertical: marginXLarge,
-                ),
-                height: MediaQuery.of(context).size.height,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      cloudyImage,
-                      width: welcomeImageWidth,
-                    ),
-                    const SizedBox(
-                      height: marginXXLarge,
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: marginMedium,
+        body: Consumer(
+          builder: (BuildContext context, HomeBloc bloc, Widget? child) =>
+              Stack(
+            alignment: Alignment.topRight,
+            children: [
+              SingleChildScrollView(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: marginMedium2,
+                    vertical: marginXLarge,
+                  ),
+                  height: MediaQuery.of(context).size.height,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        cloudyImage,
+                        width: welcomeImageWidth,
                       ),
-                      child: const BigTitleTextView(),
-                    ),
-                    const SizedBox(
-                      height: marginMedium2,
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: marginMedium2,
+                      const SizedBox(
+                        height: marginXXLarge,
                       ),
-                      child: const DescriptionTextView(),
-                    ),
-                    const SizedBox(
-                      height: marginXXLarge,
-                    ),
-                    SearchTextFieldView(
-                      onChange: (value) {},
-                      onSubmit: (value) {},
-                      onForward: () => navigateToNextPage(
-                        context: context,
-                        nextPage: const SearchResultPage(
-                          city: 'Yangon',
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: marginMedium,
                         ),
+                        child: const BigTitleTextView(),
                       ),
-                    ),
-                  ],
+                      const SizedBox(
+                        height: marginMedium2,
+                      ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: marginMedium2,
+                        ),
+                        child: const DescriptionTextView(),
+                      ),
+                      const SizedBox(
+                        height: marginXXLarge,
+                      ),
+                      SearchTextFieldView(
+                        onChange: (value) =>
+                            bloc.onChangeSearchKey(value: value),
+                        onSubmit: (value) => bloc.city.isNotNull()
+                            ? navigateToNextPage(
+                                context: context,
+                                nextPage: SearchResultPage(
+                                  city: bloc.city ?? "",
+                                ),
+                              )
+                            : null,
+                        onForward: () => bloc.city.isNotNullOrEmpty()
+                            ? navigateToNextPage(
+                                context: context,
+                                nextPage: SearchResultPage(
+                                  city: bloc.city ?? "",
+                                ),
+                              )
+                            : null,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            ButtonView(
-              text: goToFavorite,
-              icon: Icons.arrow_forward_rounded,
-              onTap: () => navigateToNextPage(
-                context: context,
-                nextPage: const FavoritePage(),
+              ButtonView(
+                text: goToFavorite,
+                icon: Icons.arrow_forward_rounded,
+                onTap: () => navigateToNextPage(
+                  context: context,
+                  nextPage: const FavoritePage(),
+                ),
+                margin: const EdgeInsets.only(
+                  top: marginXLarge,
+                  right: marginMedium3,
+                ),
               ),
-              margin: const EdgeInsets.only(
-                top: marginXLarge,
-                right: marginMedium3,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -13,22 +13,22 @@ abstract class TheWeatherApi {
 
   @POST(endPointSearchCity)
   Future<List<CityVO>> searchCity(
-    @Field(paramKey) String key,
-    @Field(paramQ) String keyword,
+    @Query(paramKey) String key,
+    @Query(paramQ) String keyword,
   );
 
   @POST(endPointWeatherDetail)
   Future<WeatherVO> getWeatherDetail(
-    @Field(paramKey) String key,
-    @Field(paramQ) String keyword,
-    @Field(paramAqi) String aqi,
+    @Query(paramKey) String key,
+    @Query(paramQ) String keyword,
+    @Query(paramAqi) String aqi,
   );
 
-  @POST(endPointWeatherDetail)
+  @POST(endPointForecast)
   Future<WeatherForecastVO> getWeatherForecast(
-    @Field(paramKey) String key,
-    @Field(paramQ) String keyword,
-    @Field(paramDays) String days,
-    @Field(paramAqi) String aqi,
+    @Query(paramKey) String key,
+    @Query(paramQ) String keyword,
+    @Query(paramDays) String days,
+    @Query(paramAqi) String aqi,
   );
 }

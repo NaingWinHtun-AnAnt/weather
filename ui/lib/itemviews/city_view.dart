@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:logic/data/vos/city_vo.dart';
 import 'package:ui/resources/colors.dart';
 import 'package:ui/resources/dimens.dart';
 
 class CityView extends StatelessWidget {
+  final CityVO? city;
   final Function onTap;
   final Function onTapSave;
 
   const CityView({
     super.key,
+    required this.city,
     required this.onTap,
     required this.onTapSave,
   });
@@ -52,31 +55,31 @@ class CityView extends StatelessWidget {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
-                      "London",
-                      style: TextStyle(
+                      city?.name ?? "",
+                      style: const TextStyle(
                         fontSize: textRegular3,
                         fontWeight: FontWeight.w700,
                         color: colorWhite,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: marginMedium,
                     ),
                     Text(
-                      "City of London, Greater London",
-                      style: TextStyle(
+                      city?.region ?? "",
+                      style: const TextStyle(
                         fontSize: textRegular,
                         color: colorWhite,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: marginSmall,
                     ),
                     Text(
-                      "United Kingdom",
-                      style: TextStyle(
+                      city?.country ?? "",
+                      style: const TextStyle(
                         fontSize: textRegular,
                         fontWeight: FontWeight.w700,
                         color: colorWhite,
@@ -90,8 +93,10 @@ class CityView extends StatelessWidget {
               flex: 1,
               child: GestureDetector(
                 onTap: () => onTapSave(),
-                child: const Icon(
-                  Icons.bookmark_border_rounded,
+                child: Icon(
+                  city?.isSave ?? false
+                      ? Icons.bookmark_rounded
+                      : Icons.bookmark_border_rounded,
                   color: colorWhite,
                 ),
               ),
